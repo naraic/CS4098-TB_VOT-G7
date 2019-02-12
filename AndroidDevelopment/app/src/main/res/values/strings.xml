@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TB_Application</string>
+    <string name="launchCamera">Launch Camera</string>
+</resources>
