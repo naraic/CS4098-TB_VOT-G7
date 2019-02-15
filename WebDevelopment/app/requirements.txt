@@ -1,0 +1,15 @@
+Flask~=1.0.0
+Flask-Session
+Flask-WTF
+
+flask-caching
+itsdangerous~=1.1.0
+Flask-SQLAlchemy
+SQLAlchemy
+SQLAlchemy-Utils
+PyMySQL
+redis
+requests
+
+sendgrid
+gunicorn
