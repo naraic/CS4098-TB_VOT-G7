@@ -1,4 +1,4 @@
-package com.example.tb_application;
+package com.example.camera_api;
 
 import org.junit.Test;
 

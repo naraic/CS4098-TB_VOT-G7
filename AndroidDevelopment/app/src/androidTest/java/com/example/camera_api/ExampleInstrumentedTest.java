@@ -1,4 +1,4 @@
-package com.example.tb_application;
+package com.example.camera_api;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.tb_application", appContext.getPackageName());
+        assertEquals("com.example.camera_api", appContext.getPackageName());
     }
 }
