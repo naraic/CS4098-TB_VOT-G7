@@ -1,4 +1,4 @@
-package com.example.camera_api;
+package com.example.onlinetutorial;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

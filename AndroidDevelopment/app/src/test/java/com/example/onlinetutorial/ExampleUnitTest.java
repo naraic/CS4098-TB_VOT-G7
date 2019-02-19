@@ -1,4 +1,4 @@
-package com.example.camera_api;
+package com.example.onlinetutorial;
 
 import org.junit.Test;
 
