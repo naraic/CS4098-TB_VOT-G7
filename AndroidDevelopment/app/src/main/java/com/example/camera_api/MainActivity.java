@@ -1,27 +1,31 @@
 package com.example.camera_api;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.hardware.Camera;
-import android.widget.FrameLayout;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Camera camera;
-    FrameLayout frameLayout;
-    ShowCamera showCamera;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout)findViewById(R.id.frameLayout);
 
-        // Open the camera.
-        camera = Camera.open(0);    // Back Camera
-        //camera = Camera.open(1);    // Front Camera
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                openCameraActivity();
+            }
+        });
+    }
 
-        showCamera = new ShowCamera(this, camera);
-        frameLayout.addView(showCamera);
+    public void openCameraActivity(){
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
     }
 }
