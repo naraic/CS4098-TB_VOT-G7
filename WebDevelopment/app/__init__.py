@@ -5,6 +5,7 @@ from flask import render_template, request, redirect, url_for, jsonify, flash, s
 from flask_session import Session
 from flask_caching import Cache
 from flask_wtf.csrf import CSRFProtect
+from flask_migrate import Migrate
 from itsdangerous import TimedSerializer
 from werkzeug.security import check_password_hash
 from .db import db, init_db
@@ -14,7 +15,7 @@ from app.models import *
 import redis
 
 
-
+migrate = Migrate()
 
 def create_app(test_config=None):
     """Create instance of the application"""
@@ -38,18 +39,20 @@ def create_app(test_config=None):
     except OSError:
         pass    
     
-
-    @app.route('/playvideo')
-    def home():
-        return render_template('home.html')
-
-    @app.route('/files/<path:file_id>')
-    def serve_file(file_id):
-        upload_folder = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
-        return send_file(safe_join(upload_folder, file_id))
-
-
     db.init_app(app)
+
+    from .views.dashboard import dash as dash_blueprint
+    app.register_blueprint(dash_blueprint)
+
+
+    from .views.review import review as review_blueprint
+    app.register_blueprint(review_blueprint)
+
+
+    from app import models
+
+    migrate.init_app(app, db)
+
 
     sess = Session()
     sess.init_app(app)

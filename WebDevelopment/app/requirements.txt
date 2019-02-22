@@ -5,6 +5,7 @@ Flask-WTF
 flask-caching
 itsdangerous~=1.1.0
 Flask-SQLAlchemy
+Flask-Migrate
 SQLAlchemy
 SQLAlchemy-Utils
 PyMySQL

@@ -1,0 +1,24 @@
+{% extends 'dash/base.html' %}
+
+{% block content %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<table style="border: 1px solid black;">
+	<h1>At risk patients</h1>
+	<tr>
+		<th>Date</th>
+		<th>Algorithm Confidence</th>
+		<th></th>
+	</tr>
+	<tr>
+		{% for video in videos %}
+		<td>{{video.upload_date}}</td>
+		<td>{{video.confidence}}</td>
+		<td><a href="/playvideo/{{video.id}}">Contact patient</a></td>
+		{% endfor %}
+	</tr>
+</table>
+{% endblock %}
