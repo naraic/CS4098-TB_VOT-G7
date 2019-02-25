@@ -1,5 +1,6 @@
 package com.example.onlinetutorial;
 
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -25,6 +26,7 @@ public class CameraActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private MediaRecorder mediaRecorder;
+    private Button stop_button;
     private boolean isRecording = false;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
@@ -160,9 +162,10 @@ public class CameraActivity extends AppCompatActivity {
             releaseMediaRecorder();
             mCamera.lock();
             isRecording = false;
-            // TODO: Inform user that the recording has stopped.
-            openVideoSuccessDialog();
 
+            // Open UploadAndSendActivity once recording has stopped
+            Intent intent = new Intent(this, UploadAndSendActivity.class);
+            startActivity(intent);
         }
         else {
             // TODO: Inform user that the camera has not started recording yet.
@@ -174,12 +177,6 @@ public class CameraActivity extends AppCompatActivity {
         if (mCamera != null) {
             mCamera.takePicture(null, null, mPicture);
         }
-    }
-
-    /*** Method for opening the video success dialog. ***/
-    public void openVideoSuccessDialog(){
-        VideoSuccessDialog videoSuccessDialog = new VideoSuccessDialog();
-        videoSuccessDialog.show(getSupportFragmentManager(), "Example_Dialog");
     }
 
     /*** Method for opening the image success dialog. ***/
