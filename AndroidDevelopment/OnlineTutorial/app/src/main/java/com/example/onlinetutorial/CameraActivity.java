@@ -66,6 +66,7 @@ public class CameraActivity extends AppCompatActivity {
                 fos.write(data);
                 fos.close();
                 camera.startPreview();
+                openImageSuccessDialog();
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {
@@ -160,7 +161,7 @@ public class CameraActivity extends AppCompatActivity {
             mCamera.lock();
             isRecording = false;
             // TODO: Inform user that the recording has stopped.
-            openDialog();
+            openVideoSuccessDialog();
 
         }
         else {
@@ -175,10 +176,16 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    /*** Method for opening the dialog. ***/
-    public void openDialog(){
-        ExampleDialog exampleDialog = new ExampleDialog();
-        exampleDialog.show(getSupportFragmentManager(), "Example_Dialog");
+    /*** Method for opening the video success dialog. ***/
+    public void openVideoSuccessDialog(){
+        VideoSuccessDialog videoSuccessDialog = new VideoSuccessDialog();
+        videoSuccessDialog.show(getSupportFragmentManager(), "Example_Dialog");
+    }
+
+    /*** Method for opening the image success dialog. ***/
+    public void openImageSuccessDialog(){
+        ImageSuccessDialog imageSuccessDialog = new ImageSuccessDialog();
+        imageSuccessDialog.show(getSupportFragmentManager(), "Example_Dialog");
     }
 
     /*** Create a File for saving an image or video ***/
