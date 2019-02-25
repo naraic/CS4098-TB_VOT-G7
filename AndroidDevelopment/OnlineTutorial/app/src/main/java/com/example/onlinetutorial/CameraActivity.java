@@ -82,6 +82,9 @@ public class CameraActivity extends AppCompatActivity {
         mCamera.unlock();
         mediaRecorder.setCamera(mCamera);
 
+        // This fixes the camera orientation so that videos are saved in portrait mode
+        mediaRecorder.setOrientationHint(90);
+
         // Step 2: Set sources
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
