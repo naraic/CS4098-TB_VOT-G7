@@ -19,13 +19,13 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import java.io.File;
 import java.io.IOException;
-
+/*
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.Response;*/
 
 public class UploadAndSendActivity extends AppCompatActivity {
 
@@ -81,6 +81,7 @@ public class UploadAndSendActivity extends AppCompatActivity {
 
     ProgressDialog progress;
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data){
         if(requestCode == 10 && resultCode == RESULT_OK){
@@ -130,6 +131,7 @@ public class UploadAndSendActivity extends AppCompatActivity {
             t.start();
         }
     }
+    */
 
     private String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
