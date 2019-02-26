@@ -10,8 +10,15 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the upload an send page."
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true"
+        android:text="This is the upload and send activity." />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload File"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
