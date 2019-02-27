@@ -1,7 +1,6 @@
 package com.example.onlinetutorial;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,13 +18,13 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import java.io.File;
 import java.io.IOException;
-/*
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;*/
+import okhttp3.Response;
 
 public class UploadAndSendActivity extends AppCompatActivity {
 
@@ -81,10 +80,10 @@ public class UploadAndSendActivity extends AppCompatActivity {
 
     ProgressDialog progress;
 
-    /*
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data){
-        if(requestCode == 10 && resultCode == RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        if (requestCode == 10 && resultCode == RESULT_OK) {
+            openVideoSuccessDialog();
 
             progress = new ProgressDialog(UploadAndSendActivity.this);
             progress.setTitle("Uploading");
@@ -94,17 +93,17 @@ public class UploadAndSendActivity extends AppCompatActivity {
 
             Thread t = new Thread(new Runnable() {
                 @Override
-                public void run(){
+                public void run() {
                     File f = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     String content_type = getMimeType(f.getPath());
 
                     String file_path = f.getAbsolutePath();
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
+                    RequestBody file_body = RequestBody.create(MediaType.parse(content_type), f);
                     RequestBody request_body = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("type",content_type)
-                            .addFormDataPart("uploaded_file",file_path.substring(file_path.lastIndexOf("/")+1), file_body)
+                            .addFormDataPart("type", content_type)
+                            .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
                             .build();
 
                     Request request = new Request.Builder()
@@ -112,15 +111,15 @@ public class UploadAndSendActivity extends AppCompatActivity {
                             .post(request_body)
                             .build();
 
-                    try{
+                    try {
                         Response response = client.newCall(request).execute();
 
-                        if(!response.isSuccessful()){
-                            throw new IOException("Error : "+response);
+                        if (!response.isSuccessful()) {
+                            throw new IOException("Error : " + response);
                         }
 
                         progress.dismiss();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
 
@@ -128,10 +127,9 @@ public class UploadAndSendActivity extends AppCompatActivity {
                 }
             });
 
-            t.start();
+            //t.start();
         }
     }
-    */
 
     private String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
