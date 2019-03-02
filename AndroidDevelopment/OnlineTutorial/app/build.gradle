@@ -39,6 +39,5 @@ android {
 
         implementation("com.squareup.okhttp3:okhttp:3.13.1")
         implementation 'com.nbsp:library:1.8'
-        // MaterialFilePicker Library: Used to select the file.
     }
 }
