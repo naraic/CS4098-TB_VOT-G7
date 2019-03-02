@@ -68,7 +68,6 @@ public class CameraActivity extends AppCompatActivity {
                 fos.write(data);
                 fos.close();
                 camera.startPreview();
-                openImageSuccessDialog();
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {
@@ -134,6 +133,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void releaseCamera(){
         if (mCamera != null){
+            mPreview.getHolder().removeCallback(mPreview);
             mCamera.release();        // Release the camera for other applications
             mCamera = null;
         }
@@ -177,12 +177,6 @@ public class CameraActivity extends AppCompatActivity {
         if (mCamera != null) {
             mCamera.takePicture(null, null, mPicture);
         }
-    }
-
-    /*** Method for opening the image success dialog. ***/
-    public void openImageSuccessDialog(){
-        ImageSuccessDialog imageSuccessDialog = new ImageSuccessDialog();
-        imageSuccessDialog.show(getSupportFragmentManager(), "Example_Dialog");
     }
 
     /*** Create a File for saving an image or video ***/

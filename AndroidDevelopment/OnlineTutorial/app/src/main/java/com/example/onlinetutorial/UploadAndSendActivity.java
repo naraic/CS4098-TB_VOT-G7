@@ -138,7 +138,7 @@ public class UploadAndSendActivity extends AppCompatActivity {
 
     /*** Method for opening the video success dialog. ***/
     public void openVideoSuccessDialog(){
-        VideoSuccessDialog videoSuccessDialog = new VideoSuccessDialog();
-        videoSuccessDialog.show(getSupportFragmentManager(), "Example_Dialog");
+        Dialog_VideoSuccess dialog_videoSuccess = new Dialog_VideoSuccess();
+        dialog_videoSuccess.show(getSupportFragmentManager(), "Example_Dialog");
     }
 }
