@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +35,7 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         mCamera = getCameraInstance();
-        mPreview = new CameraPreview(this, mCamera);    // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
     }
@@ -122,6 +120,18 @@ public class CameraActivity extends AppCompatActivity {
         releaseCamera();              // Release the camera immediately on pause event
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mCamera==null){
+            setContentView(R.layout.activity_camera);
+            mCamera = getCameraInstance();
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout)findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
+        }
+    }
+
     private void releaseMediaRecorder(){
         if (mediaRecorder != null) {
             mediaRecorder.reset();   // Clear recorder configuration
@@ -160,7 +170,8 @@ public class CameraActivity extends AppCompatActivity {
         if (isRecording == true){
             mediaRecorder.stop();
             releaseMediaRecorder();
-            mCamera.lock();
+            mCamera.stopPreview();
+            mCamera.release();
             isRecording = false;
 
             // Open UploadAndSendActivity once recording has stopped
@@ -169,13 +180,6 @@ public class CameraActivity extends AppCompatActivity {
         }
         else {
             // TODO: Inform user that the camera has not started recording yet.
-        }
-    }
-
-    /*** Capture Image - Called when button_capture is pressed. ***/
-    public void captureImage(View v) {
-        if (mCamera != null) {
-            mCamera.takePicture(null, null, mPicture);
         }
     }
 
