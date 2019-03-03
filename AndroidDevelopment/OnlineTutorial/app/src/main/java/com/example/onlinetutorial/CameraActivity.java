@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -151,7 +152,9 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Start Recording - Called when button_start is pressed. ***/
     public void startRecording(View v){
+        TextView recording = (TextView)findViewById(R.id.recroding_text);
         if (isRecording == false){
+            recording.setVisibility(View.VISIBLE);
             if (prepareVideoRecorder()) {
                 mediaRecorder.start();
                 isRecording = true;

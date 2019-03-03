@@ -15,11 +15,19 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Launch Camera"
         android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Video"
+        android:layout_below="@+id/camera_button"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -35,8 +36,12 @@ public class UploadAndSendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_and_send);
 
-        // Open dialog to confirm success of video.
-        openVideoSuccessDialog();
+        // Open dialog to confirm success of video
+        Intent intent = getIntent();
+        String previousActivity= intent.getStringExtra("FROM_ACTIVITY");
+        if (previousActivity != "MainActivity"){
+            openVideoSuccessDialog();
+        }
 
         button = (Button) findViewById(R.id.button);
 

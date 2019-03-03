@@ -13,7 +13,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button camera_button;
+    private Button upload_button;
     private int requestCode = 1;
 
     @Override
@@ -27,11 +28,19 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, requestCode);
         }
 
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        camera_button = (Button) findViewById(R.id.camera_button);
+        camera_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 openCameraActivity();
+            }
+        });
+
+        upload_button = (Button) findViewById(R.id.upload_button);
+        upload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                openUploadAndSendActivity();
             }
         });
 
@@ -39,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCameraActivity(){
         Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
+    public void openUploadAndSendActivity(){
+        Intent intent = new Intent(this, UploadAndSendActivity.class);
+        intent.putExtra("FROM_ACTIVITY", "MainActivity");
         startActivity(intent);
     }
 }

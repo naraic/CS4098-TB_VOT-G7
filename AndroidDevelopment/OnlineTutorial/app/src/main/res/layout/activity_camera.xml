@@ -36,8 +36,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is the overlying text!"
+        android:layout_centerHorizontal="true"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/recroding_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Recording..."
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="30sp"
+        android:visibility="invisible" />
 
 </RelativeLayout>
