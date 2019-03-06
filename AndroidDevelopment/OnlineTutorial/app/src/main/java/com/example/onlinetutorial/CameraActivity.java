@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity {
@@ -201,8 +202,9 @@ public class CameraActivity extends AppCompatActivity {
 
         // Create a media file name
         Date date = new Date();
-        long time = date.getTime();
-        Timestamp ts = new Timestamp(time);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy_HHmmss");
+        String ts = format.format(date);
+
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE){
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +

@@ -100,11 +100,11 @@ public class UploadAndSendActivity extends AppCompatActivity {
                     RequestBody request_body = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
                             .addFormDataPart("type",content_type)
-                            .addFormDataPart("uploaded_file",file_path.substring(file_path.lastIndexOf("/")+1), file_body)
+                            .addFormDataPart("file",file_path.substring(file_path.lastIndexOf("/")+1), file_body)
                             .build();
 
                     Request request = new Request.Builder()
-                            .url("http://192.168.0.213/testing/save_file.php")
+                            .url("https://pills.roryflynn.ie/upload_file")
                             .post(request_body)
                             .build();
 
