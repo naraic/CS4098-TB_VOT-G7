@@ -43,7 +43,23 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     public static Camera getCameraInstance(){
+        int cameraCount = 0;
         Camera c = null;
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        cameraCount = Camera.getNumberOfCameras();
+        for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
+            Camera.getCameraInfo(camIdx, cameraInfo);
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                try {
+                    c = Camera.open(camIdx);
+                } catch (Exception e) {
+                    // Camera is not available (in use or does not exist)
+                }
+            }
+        }
+        return c;
+
+        /*
         try {
             c = Camera.open(); // Attempt to get a Camera instance
         }
@@ -51,6 +67,7 @@ public class CameraActivity extends AppCompatActivity {
             // Camera is not available (in use or does not exist)
         }
         return c; // Returns null if camera is unavailable
+        */
     }
 
     /*** Responsible for the storage of the media. ***/
@@ -85,7 +102,7 @@ public class CameraActivity extends AppCompatActivity {
         mediaRecorder.setCamera(mCamera);
 
         // This fixes the camera orientation so that videos are saved in portrait mode
-        mediaRecorder.setOrientationHint(90);
+        mediaRecorder.setOrientationHint(270);
 
         // Step 2: Set sources
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
