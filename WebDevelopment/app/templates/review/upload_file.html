@@ -1,0 +1,10 @@
+{% extends 'dash/base.html' %}
+
+{% block content %}
+<br/>
+<br/>
+<form method="post" action="/upload_file" enctype="multipart/form-data">
+	<input type="file" name="file"/>
+	<input type="submit"/>
+</form>
+{% endblock %}

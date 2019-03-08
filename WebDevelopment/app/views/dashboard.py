@@ -14,5 +14,5 @@ def at_risk_patients():
 
 @dash.route('/flagged_videos')
 def dash_main():
-    videos = Video.query.filter_by(manual_review_decision="")
+    videos = Video.query.filter_by(manual_review_decision=None)
     return render_template('dash/flagged_videos.html', videos=videos)

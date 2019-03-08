@@ -57,8 +57,8 @@ def create_app(test_config=None):
     sess = Session()
     sess.init_app(app)
 
-    csrf = CSRFProtect()
-    csrf.init_app(app)
+    # csrf = CSRFProtect()
+    # csrf.init_app(app)
 
     return app
 
