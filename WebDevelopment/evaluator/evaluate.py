@@ -3,4 +3,4 @@ import sys
 
 import json
 
-print(json.dumps({"face_confidence": 0.1}))
+print(json.dumps({"face_confidence": 1.2}))

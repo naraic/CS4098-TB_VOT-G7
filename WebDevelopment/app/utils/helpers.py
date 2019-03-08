@@ -32,7 +32,8 @@ def upload_file_helper(file):
 def evaluate_file(file):
     evaluator_script_path = os.path.join(os.path.normpath(os.path.join(app.root_path, "../")), "evaluator/evaluate.py")
     upload_folder = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
-    output = subprocess.check_output(['python3', evaluator_script_path, upload_folder])
+    file_path = os.path.join(upload_folder, file.path)
+    output = subprocess.check_output(['python3', evaluator_script_path, '-src', file_path])
     evaluation = json.loads(output.decode('ascii'))
     file.confidence = evaluation["face_confidence"]
     db.session.add(file)
