@@ -14,13 +14,14 @@ table, th, td {
 		<th>Confidence</th>
 		<th></th>
 	</tr>
+	{% for video in videos %}
 	<tr>
-		{% for video in videos %}
 		<td>{{video.upload_date}}</td>
 		<td>{{video.path}}</td>
 		<td>{{video.confidence}}</td>
 		<td><a href="/playvideo/{{video.id}}">Review</a></td>
-		{% endfor %}
 	</tr>
+	{% endfor %}
+
 </table>
 {% endblock %}

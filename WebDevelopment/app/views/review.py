@@ -5,6 +5,7 @@ import os
 
 from flask import current_app as app
 from app.models import *
+from app.utils.helpers import *
 
 from app import db
 
@@ -36,3 +37,13 @@ def took_pill(id):
 def serve_file(file_id):
     upload_folder = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
     return send_file(safe_join(upload_folder, file_id))
+
+@review.route('/upload_file', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        f = upload_file_helper(file)
+        evaluate_file(f)
+        return redirect(url_for('dash.dash_main'))
+    else:
+        return render_template('review/upload_file.html')
