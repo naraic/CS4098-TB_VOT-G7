@@ -53,10 +53,14 @@
         android:visibility="invisible" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="match_parent"
-        android:layout_height="562dp"
-        app:srcCompat="@drawable/face_temp2" />
-
+        android:id="@+id/imageView3"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_alignTop="@+id/camera_preview"
+        android:layout_alignBottom="@+id/camera_preview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp"
+        android:layout_marginBottom="91dp"
+        app:srcCompat="@drawable/face_temp" />
 
 </RelativeLayout>
