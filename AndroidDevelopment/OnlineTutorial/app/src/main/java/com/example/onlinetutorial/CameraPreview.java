@@ -1,3 +1,6 @@
+// Most support for fixing the camera orientation came from
+// https://stackoverflow.com/questions/19577299/android-camera-preview-stretched
+
 package com.example.onlinetutorial;
 
 import android.content.Context;
@@ -78,21 +81,34 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int width = resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        setMeasuredDimension(width, height);
 
         if (mSupportedPreviewSizes != null) {
             mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
         }
 
-        if (mPreviewSize!=null) {
-            float ratio;
-            if(mPreviewSize.height >= mPreviewSize.width)
-                ratio = (float) mPreviewSize.height / (float) mPreviewSize.width;
-            else
-                ratio = (float) mPreviewSize.width / (float) mPreviewSize.height;
+        float ratio;
+        if (mPreviewSize.height >= mPreviewSize.width) {
+            ratio = (float) mPreviewSize.height / (float) mPreviewSize.width;
+        }
+        else {
+            ratio = (float) mPreviewSize.width / (float) mPreviewSize.height;
+        }
 
-            // One of these methods should be used, second method squishes preview slightly
-            setMeasuredDimension(width, (int) (width * ratio));
-            //        setMeasuredDimension((int) (width * ratio), height);
+        float camHeight = (int) (width * ratio);
+        float newCamHeight;
+        float newHeightRatio;
+
+        if (camHeight < height) {
+            newHeightRatio = (float) height / (float) mPreviewSize.height;
+            newCamHeight = (newHeightRatio * camHeight);
+            Log.e(TAG, camHeight + " " + height + " " + mPreviewSize.height + " " + newHeightRatio + " " + newCamHeight);
+            setMeasuredDimension((int) (width * newHeightRatio), (int) newCamHeight);
+            Log.e(TAG, mPreviewSize.width + " | " + mPreviewSize.height + " | ratio - " + ratio + " | H_ratio - " + newHeightRatio + " | A_width - " + (width * newHeightRatio) + " | A_height - " + newCamHeight);
+        } else {
+            newCamHeight = camHeight;
+            setMeasuredDimension(width, (int) newCamHeight);
+            Log.e(TAG, mPreviewSize.width + " | " + mPreviewSize.height + " | ratio - " + ratio + " | A_width - " + (width) + " | A_height - " + newCamHeight);
         }
     }
 
