@@ -58,16 +58,6 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
         return c;
-
-        /*
-        try {
-            c = Camera.open(); // Attempt to get a Camera instance
-        }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // Returns null if camera is unavailable
-        */
     }
 
     /*** Responsible for the storage of the media. ***/
