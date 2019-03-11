@@ -32,24 +32,13 @@
         android:text="Start" />
 
     <TextView
-        android:id="@+id/overlying_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is the overlying text!"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/holo_blue_bright"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/recroding_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
         android:text="Recording..."
-        android:textColor="@android:color/holo_blue_bright"
-        android:textSize="30sp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="20sp"
         android:visibility="invisible" />
 
     <ImageView
@@ -62,5 +51,23 @@
         android:layout_marginTop="89dp"
         android:layout_marginBottom="91dp"
         app:srcCompat="@drawable/face_temp" />
+
+    <TextView
+        android:id="@+id/recording_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:text="Recording Instructions" />
+
+    <TextView
+        android:id="@+id/countdownText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="20sp"
+        android:visibility="visible"
+        android:text="0:05" />
 
 </RelativeLayout>

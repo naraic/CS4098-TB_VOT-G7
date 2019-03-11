@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,20 +26,27 @@ public class CameraActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private MediaRecorder mediaRecorder;
-    private Button stop_button;
     private boolean isRecording = false;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "CameraActivity";
+
+    // Timer Setup
+    private TextView countdownText;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMilliseconds = 5000; // 5 Seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
         mCamera = getCameraInstance();
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
+
+        countdownText = findViewById(R.id.countdownText);
     }
 
     public static Camera getCameraInstance(){
@@ -161,8 +168,13 @@ public class CameraActivity extends AppCompatActivity {
     /*** Start Recording - Called when button_start is pressed. ***/
     public void startRecording(View v){
         TextView recording = (TextView)findViewById(R.id.recroding_text);
+        TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+
         if (isRecording == false){
+            startTimer();
             recording.setVisibility(View.VISIBLE);
+            recording_instructions.setText("New Recording Instructions!");
+
             if (prepareVideoRecorder()) {
                 mediaRecorder.start();
                 isRecording = true;
@@ -178,7 +190,14 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Stop Recording - Called when button_stop is pressed. ***/
     public void stopRecording(View v){
+        TextView recording = (TextView)findViewById(R.id.recroding_text);
+        TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+
         if (isRecording == true){
+            stopTimer();
+            recording.setVisibility(View.INVISIBLE);
+            recording_instructions.setText("Recording Instructions");
+
             mediaRecorder.stop();
             releaseMediaRecorder();
             mCamera.stopPreview();
@@ -192,6 +211,41 @@ public class CameraActivity extends AppCompatActivity {
         else {
             // TODO: Inform user that the camera has not started recording yet.
         }
+    }
+
+    /*** Function for starting the countdown timer ***/
+    public void startTimer(){
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMilliseconds = l;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+
+    /*** Function for stopping the countdown timer ***/
+    public void stopTimer(){
+        countDownTimer.cancel();
+    }
+
+    /*** Function for updating the countdown timer text ***/
+    public void updateTimer(){
+        int minutes = (int) timeLeftInMilliseconds / 60000;
+        int seconds = (int) timeLeftInMilliseconds % 60000 / 1000;
+
+        String timeLeftText;
+        timeLeftText = "" + minutes;
+        timeLeftText += ":";
+        if (seconds < 10) timeLeftText += "0";
+        timeLeftText += seconds;
+
+        countdownText.setText(timeLeftText);
     }
 
     /*** Create a File for saving an image or video ***/
