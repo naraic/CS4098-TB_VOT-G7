@@ -43,8 +43,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="350dp"
-        android:layout_height="500dp"
+        android:layout_width="250dp"
+        android:layout_height="350dp"
         android:layout_alignTop="@+id/camera_preview"
         android:layout_alignBottom="@+id/camera_preview"
         android:layout_centerHorizontal="true"
@@ -67,7 +67,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20sp"
-        android:visibility="visible"
-        android:text="0:05" />
+        />
 
 </RelativeLayout>

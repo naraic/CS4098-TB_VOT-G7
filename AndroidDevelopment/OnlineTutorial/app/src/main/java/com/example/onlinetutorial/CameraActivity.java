@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -32,9 +31,9 @@ public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "CameraActivity";
 
     // Timer Setup
-    private TextView countdownText;
-    private CountDownTimer countDownTimer;
-    private long timeLeftInMilliseconds = 5000; // 5 Seconds
+    private CountDownTimer countDownTimer = null;
+    private long timeLeftInMilliseconds;
+    private TextView countdown_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,8 @@ public class CameraActivity extends AppCompatActivity {
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        countdownText = findViewById(R.id.countdownText);
+        countdown_text = (TextView) findViewById(R.id.countdownText);
+
     }
 
     public static Camera getCameraInstance(){
@@ -169,9 +169,9 @@ public class CameraActivity extends AppCompatActivity {
     public void startRecording(View v){
         TextView recording = (TextView)findViewById(R.id.recroding_text);
         TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+        startTimer();
 
         if (isRecording == false){
-            startTimer();
             recording.setVisibility(View.VISIBLE);
             recording_instructions.setText("New Recording Instructions!");
 
@@ -192,9 +192,10 @@ public class CameraActivity extends AppCompatActivity {
     public void stopRecording(View v){
         TextView recording = (TextView)findViewById(R.id.recroding_text);
         TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+        stopTimer();
 
         if (isRecording == true){
-            stopTimer();
+
             recording.setVisibility(View.INVISIBLE);
             recording_instructions.setText("Recording Instructions");
 
@@ -215,6 +216,7 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Function for starting the countdown timer ***/
     public void startTimer(){
+        timeLeftInMilliseconds = 10000;
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -245,7 +247,10 @@ public class CameraActivity extends AppCompatActivity {
         if (seconds < 10) timeLeftText += "0";
         timeLeftText += seconds;
 
-        countdownText.setText(timeLeftText);
+        //String x = Long.toString(timeLeftInMilliseconds);
+        Log.d("Milliseconds", timeLeftText);
+
+        countdown_text.setText(timeLeftText);
     }
 
     /*** Create a File for saving an image or video ***/
