@@ -33,7 +33,7 @@ public class CameraActivity extends AppCompatActivity {
     // Timer Setup
     private CountDownTimer countDownTimer = null;
     private long timeLeftInMilliseconds;
-    private TextView countdown_text;
+    private TextView recording_instructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +44,6 @@ public class CameraActivity extends AppCompatActivity {
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
-
-        countdown_text = (TextView) findViewById(R.id.countdownText);
-
     }
 
     public static Camera getCameraInstance(){
@@ -167,15 +164,10 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Start Recording - Called when button_start is pressed. ***/
     public void startRecording(View v){
-        TextView recording = (TextView)findViewById(R.id.recroding_text);
-        TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
-        countdown_text = (TextView) findViewById(R.id.countdownText);
+        recording_instructions = (TextView) findViewById(R.id.recording_instructions);
         startTimer();
 
         if (isRecording == false){
-            recording.setVisibility(View.VISIBLE);
-            recording_instructions.setText("New Recording Instructions!");
-
             if (prepareVideoRecorder()) {
                 mediaRecorder.start();
                 isRecording = true;
@@ -191,14 +183,11 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Stop Recording - Called when button_stop is pressed. ***/
     public void stopRecording(View v){
-        TextView recording = (TextView)findViewById(R.id.recroding_text);
-        TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+        recording_instructions = (TextView) findViewById(R.id.recording_instructions);
         stopTimer();
 
         if (isRecording == true){
-
-            recording.setVisibility(View.INVISIBLE);
-            recording_instructions.setText("Recording Instructions");
+            recording_instructions.setText("Message 1");
 
             mediaRecorder.stop();
             releaseMediaRecorder();
@@ -217,7 +206,7 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Function for starting the countdown timer ***/
     public void startTimer(){
-        timeLeftInMilliseconds = 10000;
+        timeLeftInMilliseconds = 5000;
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -227,7 +216,7 @@ public class CameraActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                recording_instructions.setText("0:00");
             }
         }.start();
     }
@@ -251,13 +240,13 @@ public class CameraActivity extends AppCompatActivity {
         //String x = Long.toString(timeLeftInMilliseconds);
         Log.d("Milliseconds", timeLeftText);
 
-        countdown_text.setText(timeLeftText);
+        recording_instructions.setText(timeLeftText);
     }
 
     /*** Create a File for saving an image or video ***/
     private static File getOutputMediaFile(int type){
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+                Environment.DIRECTORY_DCIM), "MyCameraApp");
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
