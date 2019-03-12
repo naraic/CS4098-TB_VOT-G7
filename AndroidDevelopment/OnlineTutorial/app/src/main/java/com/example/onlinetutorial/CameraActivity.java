@@ -169,6 +169,7 @@ public class CameraActivity extends AppCompatActivity {
     public void startRecording(View v){
         TextView recording = (TextView)findViewById(R.id.recroding_text);
         TextView recording_instructions = (TextView) findViewById(R.id.recording_instructions);
+        countdown_text = (TextView) findViewById(R.id.countdownText);
         startTimer();
 
         if (isRecording == false){
