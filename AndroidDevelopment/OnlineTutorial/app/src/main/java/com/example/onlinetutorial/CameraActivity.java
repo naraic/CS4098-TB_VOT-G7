@@ -187,8 +187,6 @@ public class CameraActivity extends AppCompatActivity {
         stopTimer();
 
         if (isRecording == true){
-            recording_instructions.setText("Message 1");
-
             mediaRecorder.stop();
             releaseMediaRecorder();
             mCamera.stopPreview();
@@ -206,7 +204,7 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Function for starting the countdown timer ***/
     public void startTimer(){
-        timeLeftInMilliseconds = 5000;
+        timeLeftInMilliseconds = 6000;
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -216,7 +214,7 @@ public class CameraActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                recording_instructions.setText("0:00");
+                recording_instructions.setText("You may now take the pills. Press 'Stop' when you are finished.");
             }
         }.start();
     }
@@ -228,19 +226,12 @@ public class CameraActivity extends AppCompatActivity {
 
     /*** Function for updating the countdown timer text ***/
     public void updateTimer(){
-        int minutes = (int) timeLeftInMilliseconds / 60000;
-        int seconds = (int) timeLeftInMilliseconds % 60000 / 1000;
+        int seconds = (int) timeLeftInMilliseconds / 1000;
 
-        String timeLeftText;
-        timeLeftText = "" + minutes;
-        timeLeftText += ":";
-        if (seconds < 10) timeLeftText += "0";
+        String timeLeftText = "";
         timeLeftText += seconds;
-
-        //String x = Long.toString(timeLeftInMilliseconds);
-        Log.d("Milliseconds", timeLeftText);
-
         recording_instructions.setText(timeLeftText);
+
     }
 
     /*** Create a File for saving an image or video ***/
