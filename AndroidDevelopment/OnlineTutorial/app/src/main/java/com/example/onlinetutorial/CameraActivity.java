@@ -165,15 +165,13 @@ public class CameraActivity extends AppCompatActivity {
     /*** Start Recording - Called when button_start is pressed. ***/
     public void startRecording(View v){
         recording_instructions = (TextView) findViewById(R.id.recording_instructions);
-        startTimer();
-
         if (isRecording == false){
+            startTimer();
             if (prepareVideoRecorder()) {
                 mediaRecorder.start();
                 isRecording = true;
             } else {
                 releaseMediaRecorder();
-                // TODO: Inform user that prepareVideoRecorder() failed.
             }
         }
         else {
@@ -184,8 +182,6 @@ public class CameraActivity extends AppCompatActivity {
     /*** Stop Recording - Called when button_stop is pressed. ***/
     public void stopRecording(View v){
         recording_instructions = (TextView) findViewById(R.id.recording_instructions);
-        stopTimer();
-
         if (isRecording == true){
             mediaRecorder.stop();
             releaseMediaRecorder();
@@ -216,6 +212,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 recording_instructions.setText("You may now take the pills. Press 'Stop' when you are finished.");
+                stopTimer();
             }
         }.start();
     }
@@ -229,7 +226,7 @@ public class CameraActivity extends AppCompatActivity {
     public void updateTimer(){
         int seconds = (int) timeLeftInMilliseconds / 1000;
 
-        String timeLeftText = "";
+        String timeLeftText = "Hold face in circle for: ";
         timeLeftText += seconds;
         recording_instructions.setText(timeLeftText);
 
