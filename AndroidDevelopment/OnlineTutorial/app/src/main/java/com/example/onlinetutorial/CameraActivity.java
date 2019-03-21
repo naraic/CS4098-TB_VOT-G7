@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class CameraActivity extends AppCompatActivity {
     private boolean isRecording = false;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
+    private Button stop_start_button;
     private static final String TAG = "CameraActivity";
 
     // Timer Setup
@@ -44,6 +46,23 @@ public class CameraActivity extends AppCompatActivity {
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
+
+        stop_start_button = (Button) findViewById(R.id.stop_start_button);
+        stop_start_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRecording == false){
+                    startRecording();
+                    stop_start_button.setText("Stop");
+                    Log.d("myTag", "HERE: 1");
+                }
+                else {
+                    stopRecording();
+                    stop_start_button.setText("Start");
+                    Log.d("myTag", "HERE: 2");
+                }
+            }
+        });
     }
 
     public static Camera getCameraInstance(){
@@ -129,6 +148,10 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (isRecording == true){
+            stopRecording();
+            isRecording = false;
+        }
         releaseMediaRecorder();       // If you are using MediaRecorder, release it first.
         releaseCamera();              // Release the camera immediately on pause event
     }
@@ -137,7 +160,6 @@ public class CameraActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         if(mCamera==null){
-            setContentView(R.layout.activity_camera);
             mCamera = getCameraInstance();
             mPreview = new CameraPreview(this, mCamera);
             FrameLayout preview = (FrameLayout)findViewById(R.id.camera_preview);
@@ -163,7 +185,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     /*** Start Recording - Called when button_start is pressed. ***/
-    public void startRecording(View v){
+    public void startRecording(){
         recording_instructions = (TextView) findViewById(R.id.recording_instructions);
         if (isRecording == false){
             startTimer();
@@ -180,7 +202,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     /*** Stop Recording - Called when button_stop is pressed. ***/
-    public void stopRecording(View v){
+    public void stopRecording(){
         recording_instructions = (TextView) findViewById(R.id.recording_instructions);
         if (isRecording == true){
             mediaRecorder.stop();
