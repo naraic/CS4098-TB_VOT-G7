@@ -195,6 +195,7 @@ public class CameraActivity extends AppCompatActivity {
 
             // Open UploadAndSendActivity once recording has stopped
             Intent intent = new Intent(this, UploadAndSendActivity.class);
+            intent.putExtra("FROM_ACTIVITY", "CameraActivity");
             startActivity(intent);
         }
         else {
@@ -237,12 +238,12 @@ public class CameraActivity extends AppCompatActivity {
     /*** Create a File for saving an image or video ***/
     private static File getOutputMediaFile(int type){
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "MyCameraApp");
+                Environment.DIRECTORY_DCIM), "TB_VDOT");
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                Log.d("MyCameraApp", "failed to create directory");
+                Log.d("TB_VDOT", "failed to create directory");
                 return null;
             }
         }
