@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -30,12 +31,15 @@ public class CameraActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
     private Button stop_start_button;
+    private ImageView oval;
     private static final String TAG = "CameraActivity";
 
     // Timer Setup
     private CountDownTimer countDownTimer = null;
     private long timeLeftInMilliseconds;
     private TextView recording_instructions;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class CameraActivity extends AppCompatActivity {
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
+
+        oval = (ImageView) findViewById(R.id.imageView3);
 
         stop_start_button = (Button) findViewById(R.id.stop_start_button);
         stop_start_button.setOnClickListener(new View.OnClickListener() {
