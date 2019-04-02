@@ -4,21 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UploadAndSendActivity">
+    tools:context=".UploadAndSendActivity"
+    android:background="@drawable/gradientbackground"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="This is the upload and send activity." />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="65dp"
+        android:text="Upload And Submit"
+        android:textColor="@android:color/white"
+        android:textSize="56sp"/>
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="225dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/submit_icon" />
 
     <Button
         android:id="@+id/upload_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload File"
-        android:layout_below="@+id/textView"
+        android:background="@drawable/white_button"
+        android:textSize="22sp"
+        android:textColor="@color/startblue"
+        android:layout_marginTop="415dp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
