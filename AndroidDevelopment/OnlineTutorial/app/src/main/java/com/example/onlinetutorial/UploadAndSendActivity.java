@@ -123,15 +123,15 @@ public class UploadAndSendActivity extends AppCompatActivity {
                         }
 
                         progress.dismiss();
+                        openUploadSuccessDialog();
+
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             });
-
             t.start();
-
         }
     }
 
@@ -145,5 +145,11 @@ public class UploadAndSendActivity extends AppCompatActivity {
     public void openVideoSuccessDialog(){
         Dialog_VideoSuccess dialog_videoSuccess = new Dialog_VideoSuccess();
         dialog_videoSuccess.show(getSupportFragmentManager(), "Example_Dialog");
+    }
+
+    /*** Method for opening the upload success dialog. ***/
+    public void openUploadSuccessDialog(){
+        Dialog_UploadSuccess dialog_uploadSuccess = new Dialog_UploadSuccess();
+        dialog_uploadSuccess.show(getSupportFragmentManager(), "Example_Dialog");
     }
 }
