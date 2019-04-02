@@ -1,6 +1,8 @@
 package com.example.onlinetutorial;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -59,12 +61,20 @@ public class CameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isRecording == false){
                     startRecording();
-                    stop_start_button.setText("Stop");
+                    stop_start_button.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_stop));
+                    stop_start_button.setText("Stop Recording");
+                    //stop_start_button.setBackgroundColor(getResources().getColor(R.color.whitecolor));
+
+                    stop_start_button.setTextColor(getResources().getColor(R.color.startblue));
                     Log.d("myTag", "HERE: 1");
                 }
                 else {
                     stopRecording();
-                    stop_start_button.setText("Start");
+                    stop_start_button.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_start));
+                    stop_start_button.setText("Start Recording");
+                    //stop_start_button.setBackgroundColor(getResources().getColor(R.color.startblue));
+
+                    stop_start_button.setTextColor(getResources().getColor(R.color.whitecolor));
                     Log.d("myTag", "HERE: 2");
                 }
             }

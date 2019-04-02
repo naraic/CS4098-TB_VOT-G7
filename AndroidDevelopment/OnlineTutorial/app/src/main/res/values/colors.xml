@@ -7,5 +7,8 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="whitecolor">#FFFFFF</color>
+    <color name="dark_transparent">#73000000</color>
+    <color name="darker_transparent">#96000000</color>
 
 </resources>
