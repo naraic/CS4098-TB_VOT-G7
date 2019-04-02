@@ -4,16 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/graylight"
+    android:orientation="vertical">
+
+    <!-- Blue Section of Page -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/gradientbackground">
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Welcome to the TB_VDOT App"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:text="Pill Adviser"
+        android:textColor="@android:color/white"
+        android:textSize="56sp"/>
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/pill_bottle_final" />
+
+    <Button
+        android:id="@+id/camera_button"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="350dp"
+        android:drawableLeft="@drawable/blue_camera"
+        android:padding="16dp"
+        android:text="Launch Camera"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="425dp"
+        android:drawableLeft="@drawable/blue_submit"
+        android:padding="16dp"
+        android:text="Upload Video"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="525dp"
+        android:padding="16dp"
+        android:text="Logout"
+        android:textSize="22sp"
+        android:background="@drawable/logout_button"
+        android:textColor="@android:color/white"/>
+
+    <!--
 
     <Button
         android:id="@+id/camera_button"
@@ -30,5 +82,7 @@
         android:text="Submit Video"
         android:layout_below="@+id/camera_button"
         android:layout_centerHorizontal="true"/>
+
+     -->
 
 </RelativeLayout>

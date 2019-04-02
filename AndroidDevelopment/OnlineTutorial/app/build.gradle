@@ -42,3 +42,7 @@ android {
         implementation 'com.nbsp:library:1.8'
     }
 }
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
