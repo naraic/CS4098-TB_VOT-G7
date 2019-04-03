@@ -54,6 +54,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        // Do nothing if the back button is pressed from this screen.
+    }
+
     public void openCameraActivity(){
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);

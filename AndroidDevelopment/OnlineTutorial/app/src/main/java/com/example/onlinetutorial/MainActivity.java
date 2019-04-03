@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
+        // Do nothing if the back button is pressed from this screen.
     }
 
     public void validate(String user, String pass){
