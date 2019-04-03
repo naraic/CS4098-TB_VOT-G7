@@ -125,7 +125,6 @@ public class UploadAndSendActivity extends AppCompatActivity {
                         progress.dismiss();
                         openUploadSuccessDialog();
 
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
