@@ -30,6 +30,7 @@ import okhttp3.Response;
 public class UploadAndSendActivity extends AppCompatActivity {
 
     private Button upload_button;
+    private Button home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,14 @@ public class UploadAndSendActivity extends AppCompatActivity {
         if (activity.equals("CameraActivity")) {
             openVideoSuccessDialog();
         }
+
+        home = (Button) findViewById(R.id.home_button);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHome();
+            }
+        });
 
         upload_button = (Button) findViewById(R.id.upload_button);
 
@@ -150,5 +159,11 @@ public class UploadAndSendActivity extends AppCompatActivity {
     public void openUploadSuccessDialog(){
         Dialog_UploadSuccess dialog_uploadSuccess = new Dialog_UploadSuccess();
         dialog_uploadSuccess.show(getSupportFragmentManager(), "Example_Dialog");
+    }
+
+    /** Returns to the home activity **/
+    public void openHome(){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }

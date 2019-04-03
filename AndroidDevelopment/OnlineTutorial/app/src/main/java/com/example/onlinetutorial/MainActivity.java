@@ -4,7 +4,6 @@ package com.example.onlinetutorial;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private TextView error_login;
+    private String[] validUsernames = {"paul", "rory", "he", "shahraiz", "ciaran"};
+    private String[] validPasswords = {"password1", "password2", "password3", "password4", "password5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +44,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void validate(String user, String pass){
-        if((user.equals("admin")) && (pass.equals("1234"))){
-            error_login.setVisibility(View.INVISIBLE);
+        Boolean validated = validateUsernameAndPassword(user, pass);
+
+        if(validated == true){
+            error_login.setText("");
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
         else {
-            error_login.setVisibility(View.VISIBLE);
+            error_login.setText("Incorrect Username or Password. Please try again!");
+        }
+    }
+
+    public boolean validateUsernameAndPassword(String username, String password){
+        Boolean validPassword;
+        Boolean returnResult = false;
+        for (int x=0; x<validUsernames.length; x++){
+            if (username.equals(validUsernames[x])){
+                validPassword = validatePassword(x, password);
+                if (validPassword == true) {
+                    returnResult = true;
+                    break;
+                }
+            }
+        }
+        return returnResult;
+    }
+
+    public boolean validatePassword(int index, String password){
+        if (validPasswords[index].equals(password)){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
