@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
+
     public void validate(String user, String pass){
         if((user.equals("admin")) && (pass.equals("1234"))){
             error_login.setVisibility(View.INVISIBLE);
